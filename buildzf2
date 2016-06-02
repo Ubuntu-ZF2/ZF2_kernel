@@ -12,8 +12,7 @@ export CPUS=`nproc`
 echo "Setting Version Number"
 export VER=V5
 echo "Setting Defconfig"
-export DEFCONFIG=cyanogenmod_zenfone2_defconfig
-echo "Setting bzImage Location For FlareM kernel By say99 Of XDA"
+export DEFCONFIG=BlkStar_defconfig
 export BZIMAGE=arch/x86/boot/bzImage
 echo "Enviroment Setup Complete Now Moving To Compiling"
 
@@ -53,16 +52,19 @@ else
 fi
 
 #Kernel Packing
-wmctrl -r :ACTIVE: -N "FlareM Kernel Packing"
 echo "Starting Packing To Recovery Flashable Zip"
 cd out/
 echo "Removing Old Files"
 rm -rf bzImage *.zip
-sleep 1
+sleep $SLEEP
 echo "Copying bzImage"
 mv ../arch/x86/boot/bzImage bzImage
-sleep 1
-echo "Compiling FlareM_"$VER".zip"
-find . -type f -exec zip FlareM_"$VER".zip {} +
+sleep $SLEEP
+echo "Compiling Broken_"$VER".zip"
+find . -type f -exec zip BrokenZF2_"$VER".zip {} +
 nowf=$(date +"%T")
-echo "Completion Time : $nowf"
+cd ..
+make clean
+rm out/bzImage
+printf "cleaned files"
+printf "\n\nzip created\n"
